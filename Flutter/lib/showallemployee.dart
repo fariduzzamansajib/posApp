@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pos/db-class/employee.dart';
 import 'package:pos/main.dart';
-import 'package:pos/navbar.dart';
 
 
 List<Employee> objectsFromJson(String str)=>List<Employee>.from(json.decode(str).map((x)=> Employee.fromJson(x)));
@@ -72,7 +71,10 @@ class _ShowallState extends State<Showall> {
                                 label: Text('Name'),
                               ),
                               DataColumn(
-                                label: Text('Role'),
+                                label: Text('Email Address'),
+                              ),
+                              DataColumn(
+                                label: Text('Employee Role'),
                               ),
                             ],
                             rows: [
@@ -80,6 +82,7 @@ class _ShowallState extends State<Showall> {
                               DataRow(cells: [
                                 DataCell(Text(snapshot.data![index].id.toString())),
                                 DataCell(Text(snapshot.data![index].name.toString())),
+                                DataCell(Text(snapshot.data![index].email.toString())),
                                 DataCell(Text(snapshot.data![index].role.toString())),
                               ])
                             ]),

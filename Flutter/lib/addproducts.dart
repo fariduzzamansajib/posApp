@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pos/login.dart';
+import 'package:pos/main.dart';
 
-class Registration extends StatelessWidget {
-  const Registration({super.key});
+class Addproducts extends StatelessWidget {
+  const Addproducts({super.key});
 
   // This widget is the root of your application.
   @override
@@ -31,11 +32,11 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  String? dd = "select your role";
-  TextEditingController e_name = TextEditingController();
-  TextEditingController phone = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  String? dd = "Category";
+  TextEditingController id = TextEditingController();
+  TextEditingController barcode = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController description = TextEditingController();
 
   void _incrementCounter() {
     setState(() {
@@ -58,11 +59,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
                 child: TextField(
-                  controller: e_name,
+                  controller: id,
                   decoration: InputDecoration(
-                    labelText: "Employee Name",
-                    hintText: "Employee Name",
-                    icon: Icon(Icons.people),
+                    labelText: "Product Id",
+                    hintText: "Product Id",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular((10)))),
                   ),
@@ -71,11 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
                 child: TextField(
-                  controller: phone,
+                  controller: barcode,
                   decoration: InputDecoration(
-                    labelText: "Phone",
-                    hintText: "Phone",
-                    icon: Icon(Icons.phone),
+                    labelText: "Barcode",
+                    hintText: "Barcode",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(
@@ -89,11 +88,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
                 child: TextField(
-                  controller: email,
+                  controller: name,
                   decoration: InputDecoration(
-                    labelText: "Email",
-                    hintText: "Email",
-                    icon: Icon(Icons.email),
+                    labelText: "Product Name",
+                    hintText: "Product Name",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(
@@ -107,11 +105,10 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 15, 30, 0),
                 child: TextField(
-                  controller: password,
+                  controller: description,
                   decoration: InputDecoration(
-                    labelText: "Password",
-                    hintText: "Password",
-                    icon: Icon(Icons.password),
+                    labelText: "Description",
+                    hintText: "Description",
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(
@@ -126,24 +123,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding: const EdgeInsets.fromLTRB(65, 15, 30, 0),
                 child: Row(
                   children: [
+
                     DropdownButton(
+                      borderRadius: BorderRadius.circular(10),
                         value: dd,
                         items: <DropdownMenuItem<String>>[
                           DropdownMenuItem<String>(
                               child: Text(
-                                "Select your role",
+                                "Category",
                               ),
-                              value: "select your role"),
+                              value: "Category"),
                           DropdownMenuItem<String>(
                               child: Text(
-                                "Owner",
+                                "Food",
                               ),
-                              value: "owner"),
+                              value: "food"),
                           DropdownMenuItem<String>(
                               child: Text(
-                                "Administrator",
+                                "Fruit",
                               ),
-                              value: "administrator"),
+                              value: "fruit"),
                           DropdownMenuItem<String>(
                               child: Text(
                                 "Manager",
@@ -173,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: ElevatedButton(
                       onPressed: () {},
                       child: Text(
-                        "Registration",
+                        "Add Products",
                         style: TextStyle(
                           color: Colors.white,
                         ),
@@ -193,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => Login(),
+              builder: (context) => MyApp(),
             ),
           );
         },

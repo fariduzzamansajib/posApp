@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pos/addproducts.dart';
 import 'package:pos/inventory.dart';
 import 'package:pos/navbar.dart';
 import 'package:pos/login.dart';
@@ -70,26 +71,40 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 Row(
                   children: [
-                    Column(
+                    Row(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(22, 20, 0, 0),
-                          child: ClipOval(
-                            child: Container(
-                              height: 85,
-                              width: 85,
-                              color: Colors.greenAccent,
-                              child: Icon(Icons.search),
+                        Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(22, 20, 0, 0),
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Showall() ));
+                                },
+                                child: ClipOval(
+                                  child: Container(
+                                    height: 85,
+                                    width: 85,
+                                    color: Colors.greenAccent,
+                                    child: Icon(Icons.search),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            Material(
+                              child: GestureDetector(
+                                child:  const Padding(
+                                  padding: EdgeInsets.fromLTRB(22, 5, 0, 0),
+                                  child: Text(
+                                    "Search",
+                                    style: TextStyle(fontSize: 20),
+
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(22, 5, 0, 0),
-                          child: Text(
-                            "Search",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        )
                       ],
                     ),
                   ],
@@ -105,16 +120,13 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: GestureDetector(
                                 onTap: (){
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=> Showall() ));
-
-                                },
+                                  },
                                 child: ClipOval(
                                   child: Container(
                                     height: 85,
                                     width: 85,
                                     color: Colors.greenAccent,
                                     child: Icon(Icons.people),
-
-                                
                                   ),
                                 ),
                               ),
@@ -129,19 +141,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
                                   ),
                                 ),
-                                onTap: (){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Showall() ));
-                                },
-
-                                // onTap: (){
-                                //   Navigator.push(
-                                //       context,
-                                //       MaterialPageRoute(
-                                //       builder: (context) => Showall(),
-                                //       ),
-                                //   );
-                                // },
-
                               ),
                             )
                           ],
@@ -158,20 +157,30 @@ class _MyHomePageState extends State<MyHomePage> {
                           children: [
                             Padding(
                               padding: EdgeInsets.fromLTRB(22, 20, 0, 0),
-                              child: ClipOval(
-                                child: Container(
-                                  height: 85,
-                                  width: 85,
-                                  color: Colors.greenAccent,
-                                  child: Icon(Icons.inventory),
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Showinventory() ));
+                                },
+                                child: ClipOval(
+                                  child: Container(
+                                    height: 85,
+                                    width: 85,
+                                    color: Colors.greenAccent,
+                                    child: Icon(Icons.inventory),
+                                  ),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(2, 5, 0, 0),
-                              child: Text(
-                                "Inventory",
-                                style: TextStyle(fontSize: 20),
+                            Material(
+                              child: GestureDetector(
+                                child:  const Padding(
+                                  padding: EdgeInsets.fromLTRB(22, 5, 0, 0),
+                                  child: Text(
+                                    "Inventory",
+                                    style: TextStyle(fontSize: 20),
+
+                                  ),
+                                ),
                               ),
                             )
                           ],
@@ -186,52 +195,36 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 Row(
                   children: [
-                    Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(22, 20, 0, 0),
-                          child: ClipOval(
-                            child: Container(
-                              height: 85,
-                              width: 85,
-                              color: Colors.greenAccent,
-                              child: Icon(Icons.add),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(8, 5, 0, 0),
-                          child: Text(
-                            "Add Product",
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
                     Row(
                       children: [
                         Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
-                              child: ClipOval(
-                                child: Container(
-                                  height: 85,
-                                  width: 85,
-                                  color: Colors.greenAccent,
-                                  child: Icon(Icons.bar_chart),
+                              padding: EdgeInsets.fromLTRB(22, 20, 0, 0),
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Addproducts() ));
+                                },
+                                child: ClipOval(
+                                  child: Container(
+                                    height: 85,
+                                    width: 85,
+                                    color: Colors.greenAccent,
+                                    child: Icon(Icons.add),
+                                  ),
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(20, 5, 0, 0),
-                              child: Text(
-                                "Summary",
-                                style: TextStyle(fontSize: 20),
+                            Material(
+                              child: GestureDetector(
+                                child:  const Padding(
+                                  padding: EdgeInsets.fromLTRB(22, 5, 0, 0),
+                                  child: Text(
+                                    "Add Product",
+                                    style: TextStyle(fontSize: 20),
+
+                                  ),
+                                ),
                               ),
                             )
                           ],
@@ -247,21 +240,71 @@ class _MyHomePageState extends State<MyHomePage> {
                         Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
-                              child: ClipOval(
-                                child: Container(
-                                  height: 85,
-                                  width: 85,
-                                  color: Colors.greenAccent,
-                                  child: Icon(Icons.arrow_right),
+                              padding: EdgeInsets.fromLTRB(22, 20, 0, 0),
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Showall() ));
+                                },
+                                child: ClipOval(
+                                  child: Container(
+                                    height: 85,
+                                    width: 85,
+                                    color: Colors.greenAccent,
+                                    child: Icon(Icons.bar_chart),
+                                  ),
                                 ),
                               ),
                             ),
+                            Material(
+                              child: GestureDetector(
+                                child:  const Padding(
+                                  padding: EdgeInsets.fromLTRB(22, 5, 0, 0),
+                                  child: Text(
+                                    "Summary",
+                                    style: TextStyle(fontSize: 20),
+
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Row(
+                      children: [
+                        Column(
+                          children: [
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(22, 5, 0, 0),
-                              child: Text(
-                                "More",
-                                style: TextStyle(fontSize: 20),
+                              padding: EdgeInsets.fromLTRB(22, 20, 0, 0),
+                              child: GestureDetector(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Showall() ));
+                                },
+                                child: ClipOval(
+                                  child: Container(
+                                    height: 85,
+                                    width: 85,
+                                    color: Colors.greenAccent,
+                                    child: Icon(Icons.arrow_right),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Material(
+                              child: GestureDetector(
+                                child:  const Padding(
+                                  padding: EdgeInsets.fromLTRB(22, 5, 0, 0),
+                                  child: Text(
+                                    "More",
+                                    style: TextStyle(fontSize: 20),
+
+                                  ),
+                                ),
                               ),
                             )
                           ],
