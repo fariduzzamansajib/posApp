@@ -13,10 +13,15 @@ String objectsToJson(List<Employee> data)=>json.encode(List<Employee>.from(data)
 main(){
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home:Showall() ,
+    theme: ThemeData(
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      useMaterial3: true,
+    ),
+    home:Showall(),
   ),
   );
 }
+
 
 class Showall extends StatefulWidget {
   const Showall({super.key});
@@ -30,7 +35,7 @@ class _ShowallState extends State<Showall> {
   late List<Employee> _students=[];
   Future<List<Employee>> showall() async {
     final response=await http.get(
-      Uri.parse('http://192.168.0.110:8080/showallemployee'),
+      Uri.parse('http://192.168.0.75:8080/showallemployee'),
 
     );
     if(response.statusCode==200){
@@ -50,58 +55,57 @@ class _ShowallState extends State<Showall> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    appBar: AppBar(
+    backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      title: Text('All Employees'),
+    ),
       body: ListView(
         children: [
-          Container(
-            height: 400,
-            child: FutureBuilder<List<Employee>>(
-              future:showall(),
-              builder:(context,snapshot){
-                if(snapshot.hasData){
-                  return ListView.builder(
-                    itemCount:snapshot.data!.length,
-                    itemBuilder: (context,index){
-                      return Container(
-                        child: DataTable(
-                            columns: [
-                              DataColumn(
-                                label: Text('ID'),
-                              ),
-                              DataColumn(
-                                label: Text('Name'),
-                              ),
-                              DataColumn(
-                                label: Text('Email Address'),
-                              ),
-                              DataColumn(
-                                label: Text('Employee Role'),
-                              ),
-                            ],
-                            rows: [
+          SizedBox(
 
-                              DataRow(cells: [
-                                DataCell(Text(snapshot.data![index].id.toString())),
-                                DataCell(Text(snapshot.data![index].name.toString())),
-                                DataCell(Text(snapshot.data![index].email.toString())),
-                                DataCell(Text(snapshot.data![index].role.toString())),
-                              ])
-                            ]),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child:  Container(
+                height: 400,
+                width: 100,
+                child: FutureBuilder<List<Employee>>(
+                  future: showall(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<Employee> employees = snapshot.data!;
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(
+
+                            columns: [
+                              DataColumn(label: Text('Name')),
+                              DataColumn(label: Text('Email')),
+                              DataColumn(label: Text('Role')),
+                            ],
+                            rows: employees.map((employee) {
+                              return DataRow(cells: [
+                                DataCell(Text(employee.name.toString())),
+                                DataCell(Text(employee.email.toString())),
+                                DataCell(Text(employee.role.toString())),
+                              ]);
+                            }).toList(),
+                          ),
+                        ),
                       );
-                      // return ListTile(
-                      //   title: Text(snapshot.data![index].id.toString()),
-                      //   leading: Text(snapshot.data![index].name.toString()),
-                      // );
-                    },
-                  );
-                }else if(snapshot.hasError){
-                  return Text("Error");
-                }else{
-                  return CircularProgressIndicator();
-                }
-              },
+                    } else if (snapshot.hasError) {
+                      return Text("Error");
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  },
+                ),
+              ),
             ),
           ),
         ],
+
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

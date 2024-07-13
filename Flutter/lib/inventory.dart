@@ -30,7 +30,7 @@ class _Showinventory extends State<Showinventory> {
   late List<Product> _students=[];
   Future<List<Product>> showinventory() async {
     final response=await http.get(
-      Uri.parse('http://192.168.0.110:8080/showallproduct'),
+      Uri.parse('http://192.168.0.75:8080/showallproduct'),
 
     );
     if(response.statusCode==200){
@@ -50,54 +50,59 @@ class _Showinventory extends State<Showinventory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text('All Inventory'),
+      ),
       body: ListView(
         children: [
-          Container(
-            height: 400,
-            child: FutureBuilder<List<Product>>(
-              future:showinventory(),
-              builder:(context,snapshot){
-                if(snapshot.hasData){
-                  return ListView.builder(
-                    itemCount:snapshot.data!.length,
-                    itemBuilder: (context,index){
-                      return Container(
-                        child: DataTable(
-                            columns: [
-                              DataColumn(
-                                label: Text('Barcode'),
-                              ),
-                              DataColumn(
-                                label: Text('P_Name'),
-                              ),
-                              DataColumn(
-                                label: Text('S_Rate'),
-                              ),
-                              DataColumn(
-                                label: Text('Stock'),
-                              ),
-                            ],
-                            rows: [
+          SizedBox(
 
-                              DataRow(cells: [
-                                DataCell(Text(snapshot.data![index].barcode.toString())),
-                                DataCell(Text(snapshot.data![index].name.toString())),
-                                DataCell(Text(snapshot.data![index].sales_rate.toString())),
-                                DataCell(Text(snapshot.data![index].stock.toString())),
-                              ])
-                            ]),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child:  Container(
+                height: 400,
+                width: 100,
+                child: FutureBuilder<List<Product>>(
+                  future: showinventory(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<Product> products = snapshot.data!;
+                      return SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: DataTable(
+
+                            columns: [
+                              DataColumn(label: Text('Barcode')),
+                              DataColumn(label: Text('Name')),
+                              DataColumn(label: Text('Sales Rate')),
+                              DataColumn(label: Text('Stock')),
+                            ],
+                            rows: products.map((product) {
+                              return DataRow(cells: [
+                                DataCell(Text(product.barcode.toString())),
+                                DataCell(Text(product.name.toString())),
+                                DataCell(Text(product.sales_rate.toString())),
+                                DataCell(Text(product.stock.toString())),
+                              ]);
+                            }).toList(),
+                          ),
+                        ),
                       );
-                    },
-                  );
-                }else if(snapshot.hasError){
-                  return Text("Error");
-                }else{
-                  return CircularProgressIndicator();
-                }
-              },
+                    } else if (snapshot.hasError) {
+                      return Text("Error");
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  },
+                ),
+              ),
             ),
           ),
         ],
+
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
